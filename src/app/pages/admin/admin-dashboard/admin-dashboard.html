@@ -1,0 +1,64 @@
+<app-admin-header></app-admin-header>
+
+<main class="admin-page">
+  <div class="admin-container">
+    <div class="page-header">
+      <h1>Dashboard</h1>
+      <p class="page-subtitle">Welcome back. Here's an overview of your store.</p>
+    </div>
+
+    @if (loading) {
+      <div class="stats-grid">
+        <div class="stat-card skeleton-block"><div class="skeleton-fill"></div></div>
+        <div class="stat-card skeleton-block"><div class="skeleton-fill"></div></div>
+      </div>
+    } @else {
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon products-icon">
+            <i class="fa-solid fa-box"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ totalProducts }}</span>
+            <span class="stat-label">Products</span>
+          </div>
+          <a routerLink="/admin/products" class="stat-link">
+            Manage <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon categories-icon">
+            <i class="fa-solid fa-layer-group"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value">{{ totalCategories }}</span>
+            <span class="stat-label">Categories</span>
+          </div>
+          <a routerLink="/admin/categories" class="stat-link">
+            Manage <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    }
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <h2>Quick Actions</h2>
+      <div class="actions-grid">
+        <a routerLink="/admin/products" [queryParams]="{ action: 'add' }" class="action-card">
+          <i class="fa-solid fa-plus"></i>
+          <span>Add New Product</span>
+        </a>
+        <a routerLink="/admin/categories" [queryParams]="{ action: 'add' }" class="action-card">
+          <i class="fa-solid fa-folder-plus"></i>
+          <span>Add New Category</span>
+        </a>
+        <a routerLink="/" class="action-card">
+          <i class="fa-solid fa-eye"></i>
+          <span>View Storefront</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,54 @@
+<app-header></app-header>
+
+<!-- Page Header -->
+<section class="page-header">
+  <h1 class="page-title">Collections</h1>
+  <div class="page-divider"></div>
+</section>
+
+<!-- Categories Grid -->
+<section class="categories-section">
+  <div class="categories-container">
+    <div class="categories-grid" *ngIf="!loading">
+      <article
+        class="category-card"
+        *ngFor="let cat of categories; let i = index; let odd = odd"
+        [class.offset]="odd"
+        (click)="navigateTo(cat.slug)">
+        <div class="card-image-wrapper">
+          <div class="cat-img" [style.background-image]="'url(' + cat.image + ')'"></div>
+        </div>
+        <div class="card-info">
+          <h2 class="card-title">{{ cat.name }}</h2>
+          <div class="card-cta">
+            <span class="cta-text">Discover</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+            <div class="cta-underline"></div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Skeleton loading -->
+    <div class="categories-grid" *ngIf="loading">
+      <article
+        class="category-card"
+        *ngFor="let _ of categorySkeletons; let odd = odd"
+        [class.offset]="odd">
+        <div class="card-image-wrapper skeleton-img">
+          <div class="skeleton-block skeleton-fill"></div>
+        </div>
+        <div class="card-info">
+          <span class="skeleton-block skeleton-text skeleton-text-md"></span>
+          <span class="skeleton-block skeleton-text skeleton-text-xs"></span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>

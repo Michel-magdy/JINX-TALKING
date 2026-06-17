@@ -1,0 +1,343 @@
+.admin-page {
+  min-height: calc(100vh - 60px);
+  background: linear-gradient(180deg, #0d0d0d 0%, #121212 100%);
+  padding: 2rem 0;
+}
+
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Page Header ───────────────────────────────────────── */
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.75rem;
+  color: #ffffff;
+  margin-bottom: 0.3rem;
+}
+
+.page-subtitle {
+  color: #777;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #d4af35 0%, #b5952c 100%);
+  color: #0a0a0a;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(212, 175, 53, 0.25);
+}
+
+/* ── Form Panel ────────────────────────────────────────── */
+
+.form-panel {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.form-panel-header h2 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  margin: 0;
+}
+
+.close-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: #888;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+/* ── Form Grid ─────────────────────────────────────────── */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.span-full { grid-column: 1 / -1; }
+
+.category-form label {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+}
+
+.category-form input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #fff;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.875rem;
+}
+
+.category-form input:focus {
+  border-color: #d4af35;
+  box-shadow: 0 0 0 3px rgba(212, 175, 53, 0.1);
+  outline: none;
+}
+
+/* ── Form Actions ──────────────────────────────────────── */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cancel-btn {
+  padding: 0.6rem 1.25rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: #aaa;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.save-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #d4af35 0%, #b5952c 100%);
+  color: #0a0a0a;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.save-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 175, 53, 0.25);
+}
+
+.save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Category Grid ─────────────────────────────────────── */
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.cat-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+
+.cat-card:hover {
+  border-color: rgba(212, 175, 53, 0.2);
+  transform: translateY(-2px);
+}
+
+.cat-image {
+  height: 150px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.cat-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+.cat-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  font-size: 2rem;
+}
+
+.cat-body {
+  padding: 1rem;
+}
+
+.cat-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  color: #e0e0e0;
+  margin-bottom: 0.2rem;
+}
+
+.cat-slug {
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+  margin-bottom: 0.3rem;
+}
+
+.cat-count {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.cat-actions {
+  display: flex;
+  gap: 0.35rem;
+  padding: 0 1rem 1rem;
+}
+
+/* ── Shared icon buttons ───────────────────────────────── */
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.edit-icon { color: #3498db; }
+.edit-icon:hover { background: rgba(52, 152, 219, 0.12); }
+
+.delete-icon { color: #e74c3c; }
+.delete-icon:hover { background: rgba(231, 76, 60, 0.12); }
+
+.confirm-delete {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.15);
+  animation: pulse 0.6s infinite;
+}
+
+.cancel-delete { color: #888; }
+.cancel-delete:hover { background: rgba(255, 255, 255, 0.05); }
+
+/* ── Empty State ───────────────────────────────────────── */
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #666;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  color: #444;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.empty-state p {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .add-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cat-grid {
+    grid-template-columns: 1fr;
+  }
+}

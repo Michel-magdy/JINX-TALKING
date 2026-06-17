@@ -1,0 +1,32 @@
+<section class="collections-section">
+  <div class="section-container">
+    <div class="section-header-centered">
+      <h2>Collections</h2>
+      <div class="header-divider"></div>
+    </div>
+
+    <div class="collections-grid" *ngIf="!categoriesLoading">
+      <article
+        class="collection-card"
+        *ngFor="let cat of categories; let odd = odd"
+        [class.offset]="odd"
+        (click)="navigateToCategory(cat.slug)">
+        <div class="collection-image">
+          <div class="cat-img" [style.background-image]="'url(' + cat.image + ')'"></div>
+        </div>
+        <div class="collection-info">
+          <h3 class="collection-title">{{ cat.name }}</h3>
+          <div class="collection-cta">
+            <span class="cta-label">Discover</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+            <div class="cta-line"></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+<div class="notification-container">
+  @for (n of (notifications$ | async); track n.id) {
+    <div class="notification-toast" [class]="n.type" (click)="remove(n.id)">
+      <div class="icon">
+        @if (n.type === 'error') { <span>✕</span> }
+        @if (n.type === 'warning') { <span>⚠</span> }
+        @if (n.type === 'success') { <span>✓</span> }
+        @if (n.type === 'info') { <span>ℹ</span> }
+      </div>
+      <div class="content">
+        <p>{{ n.message }}</p>
+      </div>
+      <button class="close-btn">&times;</button>
+    </div>
+  }
+</div>

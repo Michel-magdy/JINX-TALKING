@@ -1,0 +1,457 @@
+/* ===================== HERO ===================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #f0ece4;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?q=80&w=1400&auto=format&fit=crop') center top / cover no-repeat;
+  animation: heroBackgroundReveal 1.0s cubic-bezier(0.2, 0, 0.2, 1) both;
+  z-index: 1;
+}
+
+@keyframes heroBackgroundReveal {
+  from {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 620px;
+  padding: 60px 20px;
+}
+
+.hero-eyebrow {
+  display: none;
+}
+
+.hero-content h1 {
+  font-size: 52px;
+  font-weight: 400;
+  font-style: italic;
+  color: #000000;
+  line-height: 1.15;
+  margin: 0 0 16px;
+  letter-spacing: -0.5px;
+  animation: heroTextFadeUp 0.6s 0.25s cubic-bezier(0.2, 0, 0.2, 1) both;
+  font-family: var(--font-heading);
+}
+
+.hero-content p {
+  font-size: 13px;
+  color: #444444;
+  margin: 0 0 28px;
+  line-height: 1.7;
+  animation: heroTextFadeUp 0.6s 0.4s cubic-bezier(0.2, 0, 0.2, 1) both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: heroTextFadeUp 0.6s 0.55s cubic-bezier(0.2, 0, 0.2, 1) both;
+}
+
+@keyframes heroTextFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.btn-shop {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 14px 32px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.btn-shop:hover {
+  background: #333333;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-lookbook {
+  background: transparent;
+  color: #000000;
+  border: 1px solid #000000;
+  padding: 14px 32px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.btn-lookbook:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+}
+
+/* ===================== CATEGORIES STRIP ===================== */
+.categories-strip {
+  background: #ffffff;
+  padding: 48px 0 40px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.cat-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.cat-strip-card {
+  position: relative;
+  height: 180px;
+  border-radius: 7px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+
+.cat-strip-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s ease;
+}
+
+.cat-strip-card:hover .cat-strip-img {
+  transform: scale(1.09);
+}
+
+.cat-strip-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 10, 6, 0.9) 0%, rgba(10, 10, 6, 0.3) 100%);
+  transition: background 0.3s ease;
+}
+
+.cat-strip-card:hover .cat-strip-overlay {
+  background: linear-gradient(to top, rgba(10, 10, 6, 0.95) 0%, rgba(10, 10, 6, 0.45) 100%);
+}
+
+.cat-strip-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 14px 12px;
+}
+
+.cat-strip-count {
+  display: block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: 4px;
+}
+
+.cat-strip-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.2;
+  transition: color 0.2s ease;
+}
+
+.cat-strip-card:hover .cat-strip-name {
+  color: var(--secondary);
+}
+
+.skeleton-cat-card {
+  cursor: default;
+}
+
+/* ===================== SHARED SECTION ===================== */
+.products-section,
+.accessories-section {
+  background: #ffffff;
+  padding: 52px 0;
+}
+
+.accessories-section {
+  padding-top: 0;
+  padding-bottom: 60px;
+}
+
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  animation: sectionReveal 0.5s cubic-bezier(0.2, 0, 0.2, 1) both;
+}
+
+@keyframes sectionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.section-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-accent {
+  color: var(--secondary);
+  font-size: 26px;
+  line-height: 1;
+}
+
+.view-all-link {
+  color: var(--secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  letter-spacing: 0.2px;
+}
+
+.view-all-link:hover {
+  opacity: 0.75;
+}
+
+/* ===================== ESSENTIALS GRID ===================== */
+.essentials-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.skeleton-product-grid {
+  align-items: stretch;
+}
+
+/* ===================== ACCESSORIES ROW ===================== */
+.accessories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.accessory-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.accessory-card:hover {
+  border-color: #000000;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.accessory-image {
+  width: 72px;
+  height: 72px;
+  border-radius: 5px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #f5f5f5;
+}
+
+.accessory-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.accessory-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.accessory-info h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.accessory-sub {
+  font-size: 10px;
+  color: #888888;
+  letter-spacing: 1.5px;
+  margin: 0 0 6px;
+}
+
+.accessory-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0;
+}
+
+.skeleton-accessory-card {
+  cursor: default;
+}
+
+.skeleton-accessory-card:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: #e5e5e5;
+}
+
+.skeleton-accessory-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ===================== ERROR ===================== */
+.error-container {
+  padding: 40px 20px;
+  text-align: center;
+  background: #2a1010;
+  border: 1px solid #e74c3c;
+  border-radius: 6px;
+  margin: 20px;
+  color: #e74c3c;
+}
+
+.error-container p {
+  font-size: 16px;
+  margin: 0 0 16px;
+}
+
+.btn-retry {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-retry:hover {
+  background: #c0392b;
+}
+
+/* ===================== ANIMATIONS ===================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 900px) {
+  .essentials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .accessories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+  }
+
+  .cat-strip-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .essentials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h1 {
+    font-size: 28px;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+  }
+
+  .cat-strip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cat-strip-card {
+    height: 140px;
+  }
+}

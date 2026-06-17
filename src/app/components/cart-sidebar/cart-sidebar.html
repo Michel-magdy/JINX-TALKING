@@ -1,0 +1,62 @@
+<!-- Backdrop -->
+<div class="cart-backdrop" *ngIf="isOpen" (click)="close()"></div>
+
+<!-- Sidebar Drawer -->
+<div class="cart-sidebar" [class.open]="isOpen">
+
+  <!-- Header -->
+  <div class="cart-header">
+    <h2 class="cart-title">Your Cart <span class="cart-count" *ngIf="itemCount > 0">{{ itemCount }}</span></h2>
+    <button class="btn-close-cart" (click)="close()" aria-label="Close cart">✕</button>
+  </div>
+
+  <!-- Empty State -->
+  <div class="cart-empty" *ngIf="(cart$ | async)?.items?.length === 0">
+    <div class="empty-icon">🛍️</div>
+    <p>Your cart is empty</p>
+    <button class="btn-continue" (click)="close()">Continue Shopping</button>
+  </div>
+
+  <!-- Cart Items -->
+  <div class="cart-items" *ngIf="(cart$ | async)?.items?.length! > 0">
+    <div class="cart-item" *ngFor="let item of (cart$ | async)?.items">
+      <div class="item-image">
+        <img [src]="item.product.image" [alt]="item.product.name" />
+      </div>
+      <div class="item-details">
+        <h4 class="item-name">{{ item.product.name }}</h4>
+        <p class="item-meta" *ngIf="item.size || item.color">
+          <span *ngIf="item.size">{{ item.size }}</span>
+          <span *ngIf="item.color"> · {{ item.color }}</span>
+        </p>
+        <p class="item-price">LE {{ (item.price * item.quantity) | number:'1.0-0' }}</p>
+
+        <div class="item-controls">
+          <button class="qty-btn" (click)="updateQty(item.id, item.quantity - 1)">−</button>
+          <span class="qty-value">{{ item.quantity }}</span>
+          <button class="qty-btn" (click)="updateQty(item.id, item.quantity + 1)">+</button>
+          <button class="btn-remove" (click)="remove(item.id)" title="Remove item">🗑</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer: Total + Checkout -->
+  <div class="cart-footer" *ngIf="(cart$ | async)?.items?.length! > 0">
+    <div class="cart-total">
+      <span>Total</span>
+      <span class="total-amount">LE {{ (cart$ | async)?.total | number:'1.0-0' }}</span>
+    </div>
+    <button class="btn-whatsapp" (click)="checkoutWhatsApp()">
+      <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+        <path
+          d="M12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.1 1.523 5.82L0 24l6.335-1.496A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.81 9.81 0 01-5.002-1.37l-.359-.214-3.72.878.936-3.617-.235-.371A9.817 9.817 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z" />
+      </svg>
+      Order via WhatsApp
+    </button>
+    <button class="btn-clear" (click)="clearCart()">Clear Cart</button>
+  </div>
+
+</div>

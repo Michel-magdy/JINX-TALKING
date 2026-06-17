@@ -1,0 +1,134 @@
+<nav class="navbar navbar-expand-lg navbar-dark py-3" [class.scrolled]="isScrolled">
+    <div class="container">
+
+        <!-- Left : Logo -->
+        <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/" (click)="closeMobileMenu()">
+            <img src="assets/images/crown.png" alt="Prestige Logo" class="brand-logo">
+            <strong class="brand-text">PRESTIGE</strong>
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler w-25" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Content -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+
+            <!-- Center : Navigation -->
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item mx-3">
+                    <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMobileMenu()">Home</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" routerLink="/categories" routerLinkActive="active" (click)="closeMobileMenu()">Collections</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link" (click)="scrollToFooter()" style="cursor:pointer">Contact</a>
+                </li>
+            </ul>
+
+            <!-- Right : Search + Cart -->
+            <div class="nav-right">
+
+                <!-- Search Wrapper (position: relative for overlay) -->
+                <div class="search-wrapper">
+                    <form class="search-form" role="search" (submit)="$event.preventDefault()">
+                        <!-- Search Icon -->
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+
+                        <!-- Input -->
+                        <input
+                            #searchInput
+                            class="search-input"
+                            type="search"
+                            placeholder="Search... (press /)"
+                            aria-label="Search"
+                            [value]="searchQuery"
+                            (input)="onSearchInput($event)"
+                            (focus)="onSearchFocus()"
+                            autocomplete="off" />
+
+                        <!-- Clear button -->
+                        <button
+                            *ngIf="searchQuery"
+                            class="search-clear"
+                            type="button"
+                            (click)="clearSearch()"
+                            aria-label="Clear search">
+                            &times;
+                        </button>
+                    </form>
+
+                    <!-- ====== SEARCH OVERLAY ====== -->
+                    <div class="search-overlay" *ngIf="isSearchOpen">
+
+                        <!-- Loading spinner -->
+                        <div class="search-loading" *ngIf="isSearching">
+                            <span class="spinner"></span>
+                            <span>Searching...</span>
+                        </div>
+
+                        <!-- Results -->
+                        <ng-container *ngIf="!isSearching">
+                            <!-- No results -->
+                            <div class="search-empty" *ngIf="searchResults.length === 0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                                    fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                <p>No results for <strong>"{{ searchQuery }}"</strong></p>
+                            </div>
+
+                            <!-- Result list -->
+                            <ul class="search-results-list" *ngIf="searchResults.length > 0">
+                                <li
+                                    class="search-result-item"
+                                    *ngFor="let product of searchResults"
+                                    (click)="goToProduct(product.id)">
+                                    <div class="result-img">
+                                        <img [src]="product.image" [alt]="product.name" loading="lazy" />
+                                    </div>
+                                    <div class="result-info">
+                                        <span class="result-name">{{ product.name }}</span>
+                                        <span class="result-category">{{ product.category }}</span>
+                                    </div>
+                                    <div class="result-price">
+                                        <span class="price-current">{{ product.price | number:'1.0-0' }} LE</span>
+                                        <span class="price-original" *ngIf="hasOriginalPrice(product)">
+                                            {{ product.originalPrice | number:'1.0-0' }} LE
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <!-- Footer hint -->
+                            <div class="search-footer" *ngIf="searchResults.length > 0">
+                                <span>Press <kbd>Esc</kbd> to close</span>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <!-- ====== END OVERLAY ====== -->
+                </div>
+
+                <!-- Cart Button -->
+                <button class="cart-btn" (click)="toggleCart()" aria-label="Open cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span class="cart-label" *ngIf="cartCount > 0">{{ cartCount }}</span>
+                    <span class="cart-label cart-label-empty" *ngIf="cartCount === 0">Cart</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>

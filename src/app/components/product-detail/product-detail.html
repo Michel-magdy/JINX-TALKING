@@ -1,0 +1,173 @@
+<app-header></app-header>
+
+<div *ngIf="error" class="error-container">
+    <div class="container">
+        <h2>{{ error }}</h2>
+        <button class="btn-primary" (click)="goBack()">Back to Home</button>
+    </div>
+</div>
+
+<div *ngIf="!error && product" class="product-detail-page">
+    <div class="container">
+
+        <!-- Breadcrumbs -->
+        <div class="breadcrumbs">
+            <span (click)="goBack()" class="breadcrumb-link">Home</span>
+            <span class="breadcrumb-sep">/</span>
+            <span (click)="goToCategory(product.categorySlug || '')" class="breadcrumb-link">{{ product.category
+                }}</span>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current">{{ product.name }}</span>
+        </div>
+
+        <!-- Main Product Grid -->
+        <div class="product-detail-grid">
+
+            <!-- Left: Image Gallery -->
+            <div class="product-gallery">
+                <div class="main-image-container">
+                    <img [src]="selectedImage" [alt]="product.name" class="main-image">
+                    <div *ngIf="product.discount" class="discount-badge">-{{ product.discount }}%</div>
+                </div>
+
+                <div class="thumbnail-list" *ngIf="product.images && product.images.length > 0">
+                    <div class="thumbnail" [class.active]="selectedImage === product.image"
+                        (click)="selectImage(product.image)">
+                        <img [src]="product.image" [alt]="product.name + ' main'">
+                    </div>
+                    <div class="thumbnail" *ngFor="let img of product.images" [class.active]="selectedImage === img"
+                        (click)="selectImage(img)">
+                        <img [src]="img" [alt]="product.name + ' thumbnail'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Product Info -->
+            <div class="product-info-container">
+                <h1 class="product-title">{{ product.name }}</h1>
+                <div class="product-price-section">
+                    <span class="current-price">LE {{ product.price }}</span>
+                    <span class="original-price" *ngIf="product.originalPrice">{{ product.originalPrice }} LE</span>
+                    <span class="discount-tag" *ngIf="product.discount">-{{ product.discount }}%</span>
+                </div>
+
+                <p class="product-description">{{ product.description }}</p>
+
+                <!-- Color Selection -->
+                <div class="product-options" *ngIf="product.colors && product.colors.length > 0">
+                    <div class="option-header">
+                        <span class="option-label">COLOR</span>
+                        <span class="option-value">{{ selectedColor }}</span>
+                    </div>
+                    <div class="color-list">
+                        <button class="color-swatch" *ngFor="let color of product.colors"
+                            [class.active]="selectedColor === color"
+                            [style.backgroundColor]="getColorSwatchColor(color)" [title]="color"
+                            (click)="selectColor(color)">
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Size Selection -->
+                <div class="product-options" *ngIf="product.sizes && product.sizes.length > 0">
+                    <div class="option-header">
+                        <span class="option-label">SELECT SIZE</span>
+                        <span class="size-guide">SIZE GUIDE</span>
+                    </div>
+                    <div class="size-list">
+                        <button class="size-btn" *ngFor="let size of product.sizes"
+                            [class.active]="selectedSize === size" (click)="selectSize(size)">
+                            {{ size }}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stock Status -->
+                <div class="stock-status"
+                    [ngClass]="{'in-stock': product.stock > 0, 'out-of-stock': product.stock === 0}">
+                    <span class="stock-dot"></span>
+                    {{ product.stock > 0 ? 'In Stock (' + product.stock + ' available)' : 'Out of Stock' }}
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="product-actions">
+                    <button class="btn-cart" (click)="purchaseViaWhatsapp()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        BUY VIA WHATSAPP
+                    </button>
+                    <button class="btn-add-cart-detail" (click)="onAddToCart()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        ADD TO CART
+                    </button>
+                </div>
+
+                <!-- Collapsible Sections -->
+                <div class="collapsible-section" (click)="toggleSection('craftsmanship')">
+                    <div class="section-header">
+                        <span>CRAFTSMANSHIP & DETAILS</span>
+                        <span class="caret" [class.open]="expandedSection === 'craftsmanship'">&#8964;</span>
+                    </div>
+                    <div class="section-body" [class.visible]="expandedSection === 'craftsmanship'">
+                        <div class="product-rating">
+                            <span class="stars">&#9733; {{ product.rating }}</span>
+                            <span class="reviews">({{ product.reviewCount }} reviews)</span>
+                        </div>
+                        <ul>
+                            <li>Premium quality materials</li>
+                            <li>Expertly crafted for comfort and style</li>
+                            <li>Available in multiple sizes and colors</li>
+                            <li>Easy care instructions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="collapsible-section" (click)="toggleSection('shipping')">
+                    <div class="section-header">
+                        <span>SHIPPING & RETURNS</span>
+                        <span class="caret" [class.open]="expandedSection === 'shipping'">&#8964;</span>
+                    </div>
+                    <div class="section-body" [class.visible]="expandedSection === 'shipping'">
+                        <ul>
+                            <li>Free shipping on orders over $500</li>
+                            <li>Standard delivery 3-5 business days</li>
+                            <li>30-day easy returns</li>
+                            <li>Contact us via WhatsApp for assistance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete the Look -->
+        <div class="complete-the-look" *ngIf="relatedProducts.length > 0">
+            <div class="section-title-block">
+                <h2>COMPLETE THE LOOK</h2>
+                <p>Curated recommendations from our master tailors.</p>
+            </div>
+            <div class="related-grid">
+                <div class="related-card" *ngFor="let p of relatedProducts" (click)="viewProductDetail(p.id)">
+                    <div class="related-img-wrap">
+                        <img [src]="p.image" [alt]="p.name">
+                    </div>
+                    <div class="related-info">
+                        <p class="related-name">{{ p.name | uppercase }}</p>
+                        <span class="related-price">LE {{ p.price }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<app-footer></app-footer>

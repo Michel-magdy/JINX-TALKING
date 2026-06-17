@@ -1,0 +1,31 @@
+<app-header></app-header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Your Style Starts Here</h1>
+    <p>Discover modern fashion designed with<br>quality, comfort, and confidence in mind.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-shop" (click)="viewAllProducts()">SHOP NOW</button>
+      <button class="btn-lookbook">EXPLORE COLLECTION</button>
+    </div>
+  </div>
+</section>
+
+<!-- Curated Essentials Section -->
+@defer (on viewport) {
+  <app-home-featured></app-home-featured>
+} @placeholder {
+  <div class="section-spacer"></div>
+}
+
+<!-- Collections Section -->
+@defer (on viewport) {
+  <app-home-categories></app-home-categories>
+} @placeholder {
+  <div class="section-spacer"></div>
+}
+
+<app-footer></app-footer>

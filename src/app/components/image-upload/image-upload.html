@@ -1,0 +1,79 @@
+<div class="upload-wrapper">
+  <label class="upload-label">{{ label }}</label>
+
+  <!-- Single image mode -->
+  @if (!multiple) {
+    @if (displayUrl) {
+      <div class="preview-container">
+        <img [src]="displayUrl" alt="Preview" class="preview-image" />
+        <div class="preview-actions">
+          <label class="action-btn change-btn" for="file-input-{{ label }}">
+            <i class="fa-solid fa-arrows-rotate"></i> Change
+          </label>
+          <button class="action-btn remove-btn" (click)="removeImage()" type="button">
+            <i class="fa-solid fa-trash"></i> Remove
+          </button>
+        </div>
+      </div>
+    } @else {
+      <div
+        class="dropzone"
+        [class.dragging]="isDragging"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+      >
+        <label for="file-input-{{ label }}" class="dropzone-content">
+          <i class="fa-solid fa-cloud-arrow-up dropzone-icon"></i>
+          <span class="dropzone-text">Drag & drop or <strong>click to browse</strong></span>
+          <span class="dropzone-hint">JPG, PNG, WebP — max 5 MB</span>
+        </label>
+      </div>
+    }
+    <input
+      type="file"
+      [id]="'file-input-' + label"
+      class="file-input"
+      accept="image/jpeg,image/png,image/webp,image/gif"
+      (change)="onFileSelected($event)"
+    />
+  }
+
+  <!-- Multiple images mode -->
+  @if (multiple) {
+    <div class="multi-grid">
+      @for (url of displayUrls; track url; let i = $index) {
+        <div class="multi-thumb">
+          <img [src]="url" alt="Image {{ i + 1 }}" />
+          <button class="thumb-remove" (click)="removeMultipleImage(i)" type="button">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      }
+      <div
+        class="multi-add dropzone"
+        [class.dragging]="isDragging"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+      >
+        <label for="multi-file-input-{{ label }}" class="multi-add-content">
+          <i class="fa-solid fa-plus"></i>
+          <span>Add</span>
+        </label>
+      </div>
+    </div>
+    <input
+      type="file"
+      [id]="'multi-file-input-' + label"
+      class="file-input"
+      accept="image/jpeg,image/png,image/webp,image/gif"
+      multiple
+      (change)="onFileSelected($event)"
+    />
+  }
+
+  @if (errorMessage) {
+    <p class="upload-error">{{ errorMessage }}</p>
+  }
+</div>

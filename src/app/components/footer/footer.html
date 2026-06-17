@@ -1,0 +1,41 @@
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-col brand-col">
+      <div class="footer-logo">
+        <span class="logo-diamond">&#9670;</span>
+        <span class="logo-text">PRESTIGE</span>
+      </div>
+      <p class="brand-tagline">
+        A local brand focused on clean style, quality pieces, and personal service.
+      </p>
+      <p class="brand-note">
+        Orders and questions go straight to one admin, so every conversation stays simple and
+        personal.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4 class="footer-heading">Browse</h4>
+      <ul class="footer-links">
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/categories">Collections</a></li>
+        <li><a routerLink="/products">All Products</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col contact-col">
+      <h4 class="footer-heading">Contact Admin</h4>
+      <p class="contact-copy">
+        Need help with sizes, availability, or your order? Message the store admin directly on
+        WhatsApp.
+      </p>
+      <a class="contact-link" [href]="whatsappHref" target="_blank" rel="noopener">
+        WhatsApp: {{ whatsappLabel }}
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {{ currentYear }} PRESTIGE. Local brand, personal service.</p>
+  </div>
+</footer>

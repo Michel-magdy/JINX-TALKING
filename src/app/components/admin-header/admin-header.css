@@ -1,0 +1,140 @@
+.admin-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(212, 175, 53, 0.15);
+}
+
+.admin-bar-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  height: 60px;
+}
+
+/* ── Logo ──────────────────────────────────────────────── */
+
+.admin-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #d4af35;
+  font-size: 1.1rem;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+
+.admin-logo i {
+  font-size: 1.3rem;
+}
+
+.admin-logo strong {
+  font-weight: 700;
+}
+
+/* ── Nav ───────────────────────────────────────────────── */
+
+.admin-nav {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.admin-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: #999;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.admin-nav a:hover {
+  color: #e0e0e0;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.admin-nav a.active {
+  color: #d4af35;
+  background: rgba(212, 175, 53, 0.1);
+}
+
+/* ── Actions ───────────────────────────────────────────── */
+
+.admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.store-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  color: #999;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.store-link:hover {
+  color: #e0e0e0;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  border: 1px solid rgba(231, 76, 60, 0.2);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: rgba(231, 76, 60, 0.2);
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .admin-bar-inner {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 0.75rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .admin-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .admin-nav a span {
+    display: none;
+  }
+
+  .store-link span {
+    display: none;
+  }
+}

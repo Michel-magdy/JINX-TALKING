@@ -1,0 +1,23 @@
+<section class="products-section">
+  <div class="section-container">
+    <div class="section-header-centered">
+      <h2>Curated Essentials</h2>
+      <p class="section-subtitle">Pieces that define the modern wardrobe, selected for their timeless appeal and flawless execution.</p>
+    </div>
+    <div *ngIf="productsLoading" class="essentials-grid skeleton-product-grid">
+      <div class="skeleton-product-card" *ngFor="let _ of productSkeletons">
+        <div class="skeleton-block skeleton-product-image"></div>
+        <div class="skeleton-product-body">
+          <span class="skeleton-block skeleton-text skeleton-text-sm"></span>
+          <span class="skeleton-block skeleton-text skeleton-text-md"></span>
+          <span class="skeleton-block skeleton-text skeleton-text-xs"></span>
+        </div>
+      </div>
+    </div>
+    <div class="essentials-grid" *ngIf="!productsLoading">
+      <app-product-card *ngFor="let product of products" [product]="product"
+        (viewDetails)="onViewDetails($event)" (addToCart)="onAddToCart($event)">
+      </app-product-card>
+    </div>
+  </div>
+</section>

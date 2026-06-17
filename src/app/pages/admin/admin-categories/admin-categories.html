@@ -1,0 +1,124 @@
+<app-admin-header></app-admin-header>
+
+<main class="admin-page">
+  <div class="admin-container">
+
+    <!-- ── Page Header ──────────────────────────────────────── -->
+    <div class="page-header">
+      <div>
+        <h1>Categories</h1>
+        <p class="page-subtitle">Manage your product categories</p>
+      </div>
+      @if (!showForm) {
+        <button class="add-btn" (click)="openAddForm()">
+          <i class="fa-solid fa-plus"></i> Add Category
+        </button>
+      }
+    </div>
+
+    <!-- ── Category Form ────────────────────────────────────── -->
+    @if (showForm) {
+      <div class="form-panel">
+        <div class="form-panel-header">
+          <h2>{{ editingId ? 'Edit Category' : 'Add New Category' }}</h2>
+          <button class="close-btn" (click)="closeForm()" type="button">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <form (ngSubmit)="onSave()" class="category-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="cat-name">Category Name *</label>
+              <input id="cat-name" type="text" [(ngModel)]="form.name" name="name"
+                placeholder="e.g. Men's Casual" (ngModelChange)="onNameChange()" required />
+            </div>
+
+            <div class="form-group">
+              <label for="cat-slug">Slug</label>
+              <input id="cat-slug" type="text" [(ngModel)]="form.slug" name="slug"
+                placeholder="auto-generated" />
+            </div>
+
+            <div class="form-group span-full">
+              <app-image-upload
+                label="Category Image"
+                [currentUrl]="form.image"
+                (imageSelected)="onImageSelected($event)"
+                (imageRemoved)="onImageRemoved()"
+              ></app-image-upload>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="closeForm()">Cancel</button>
+            <button type="submit" class="save-btn" [disabled]="saving">
+              @if (saving) {
+                <i class="fa-solid fa-spinner fa-spin"></i> Saving...
+              } @else {
+                <i class="fa-solid fa-floppy-disk"></i> {{ editingId ? 'Update Category' : 'Create Category' }}
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    }
+
+    <!-- ── Categories Grid ────────────────────────────────── -->
+    @if (!showForm) {
+      @if (loading) {
+        <div class="cat-grid">
+          @for (i of [1,2,3,4]; track i) {
+            <div class="cat-card skeleton-block"><div class="skeleton-fill" style="height: 180px;"></div></div>
+          }
+        </div>
+      } @else if (categories.length === 0) {
+        <div class="empty-state">
+          <i class="fa-solid fa-layer-group"></i>
+          <p>No categories yet. Create your first category.</p>
+          <button class="add-btn" (click)="openAddForm()">
+            <i class="fa-solid fa-plus"></i> Add Category
+          </button>
+        </div>
+      } @else {
+        <div class="cat-grid">
+          @for (cat of categories; track cat.id) {
+            <div class="cat-card">
+              <div class="cat-image">
+                @if (cat.image) {
+                  <img [src]="cat.image" [alt]="cat.name" />
+                } @else {
+                  <div class="cat-placeholder">
+                    <i class="fa-solid fa-image"></i>
+                  </div>
+                }
+              </div>
+              <div class="cat-body">
+                <h3 class="cat-name">{{ cat.name }}</h3>
+                <span class="cat-slug">{{ cat.slug }}</span>
+                <span class="cat-count">{{ cat.product_count || 0 }} products</span>
+              </div>
+              <div class="cat-actions">
+                <button class="icon-btn edit-icon" (click)="openEditForm(cat)" title="Edit">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                @if (deleteConfirmId === cat.id) {
+                  <button class="icon-btn confirm-delete" (click)="onDelete(cat.id)" title="Confirm Delete">
+                    <i class="fa-solid fa-check"></i>
+                  </button>
+                  <button class="icon-btn cancel-delete" (click)="cancelDelete()" title="Cancel">
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                } @else {
+                  <button class="icon-btn delete-icon" (click)="confirmDelete(cat.id)" title="Delete">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+</main>

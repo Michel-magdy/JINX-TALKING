@@ -1,0 +1,161 @@
+/* ===================== PAGE HERO ===================== */
+.page-hero {
+  background: #ffffff;
+  padding: 140px 24px 44px;
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.page-eyebrow {
+  display: inline-block;
+  color: #888888;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.page-hero h1 {
+  font-size: 36px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0 0 10px;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  font-family: var(--font-heading);
+}
+
+.page-hero p {
+  font-size: 14px;
+  color: #888888;
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ===================== FILTER BAR ===================== */
+.filter-bar {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(6px);
+}
+
+.filter-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-chip {
+  background: transparent;
+  color: #666666;
+  border: 1px solid #e5e5e5;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.filter-chip:hover {
+  border-color: #000000;
+  color: #000000;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.filter-chip.active {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+  font-weight: 700;
+}
+
+/* ===================== PRODUCTS SECTION ===================== */
+.products-section {
+  background: #ffffff;
+  padding: 48px 0 72px;
+  min-height: 50vh;
+}
+
+.products-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.skeleton-product-grid {
+  align-items: stretch;
+}
+
+/* ===================== EMPTY STATE ===================== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 72px 20px;
+  text-align: center;
+  color: #888888;
+  font-size: 15px;
+}
+
+.btn-clear {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-clear:hover {
+  background: #333333;
+  transform: translateY(-1px);
+}
+
+/* ===================== ERROR ===================== */
+.error-box {
+  padding: 32px 20px;
+  text-align: center;
+  background: #fff5f5;
+  border: 1px solid #e74c3c;
+  border-radius: 0;
+  margin: 20px;
+  color: #e74c3c;
+  font-size: 15px;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 1024px) {
+  .products-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .page-hero h1 { font-size: 28px; }
+}
+
+@media (max-width: 480px) {
+  .products-grid { grid-template-columns: 1fr; }
+  .page-hero h1 { font-size: 22px; }
+}

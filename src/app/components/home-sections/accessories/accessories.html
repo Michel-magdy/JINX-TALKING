@@ -1,0 +1,32 @@
+<section class="accessories-section">
+  <div class="section-container">
+    <div class="section-header">
+      <h2><span class="section-accent">|</span> Luxury Accessories</h2>
+      <a class="view-all-link explore" (click)="viewAllProducts()">Explore More</a>
+    </div>
+    <div *ngIf="productsLoading" class="accessories-grid skeleton-accessories-grid">
+      <div class="accessory-card skeleton-accessory-card" *ngFor="let _ of accessorySkeletons">
+        <div class="accessory-image">
+          <div class="skeleton-block skeleton-fill"></div>
+        </div>
+        <div class="accessory-info skeleton-accessory-info">
+          <span class="skeleton-block skeleton-text skeleton-text-md"></span>
+          <span class="skeleton-block skeleton-text skeleton-text-sm"></span>
+          <span class="skeleton-block skeleton-text skeleton-text-xs"></span>
+        </div>
+      </div>
+    </div>
+    <div class="accessories-grid" *ngIf="!productsLoading">
+      <div class="accessory-card" *ngFor="let product of products" (click)="onViewDetails(product.id)">
+        <div class="accessory-image">
+          <img [src]="product.image" [alt]="product.name" loading="lazy" />
+        </div>
+        <div class="accessory-info">
+          <h4>{{ product.name }}</h4>
+          <p class="accessory-sub">{{ product.description | slice:0:20 | uppercase }}</p>
+          <p class="accessory-price">{{ product.price | number:'1.0-0' }} LE</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

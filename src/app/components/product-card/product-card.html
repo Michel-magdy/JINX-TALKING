@@ -1,0 +1,27 @@
+<div class="product-card" (click)="onViewDetails()">
+  <div class="product-image">
+    <img [src]="product.image" [alt]="product.name" loading="lazy" />
+    <span *ngIf="product.featured" class="badge-exclusive">Exclusive</span>
+    <span *ngIf="product.discount && !product.featured" class="badge-discount">
+      -{{ product.discount }}%
+    </span>
+    <div class="card-overlay">
+      <button class="btn-add-cart" (click)="onAddToCart(); $event.stopPropagation()" [disabled]="!isInStock">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+
+  <div class="product-info">
+    <div class="info-row">
+      <div class="info-left">
+        <h3>{{ product.name }}</h3>
+        <p class="meta-label">{{ categoryDisplay }}</p>
+      </div>
+      <div class="info-right">
+        <p class="price-original" *ngIf="product.originalPrice">${{ product.originalPrice | number:'1.0-0' }}</p>
+        <p class="price">${{ discountedPrice | number:'1.0-0' }}</p>
+      </div>
+    </div>
+  </div>
+</div>

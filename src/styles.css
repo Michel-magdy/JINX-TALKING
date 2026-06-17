@@ -1,0 +1,710 @@
+/* ============================================
+   PRESTIGE E-COMMERCE APP - GLOBAL STYLES
+   ============================================ */
+
+/* 1. CSS VARIABLES / THEME */
+:root {
+  /* Colors */
+  --app-bg: #ffffff;
+  --home-hero-bg-image: url('assets/images/banners/ulrich-derboven-1kDL4O0TJlg-unsplash.jpg');
+  --primary: #000000;
+  --primary-dark: #333333;
+  --secondary: #111111;
+  --secondary-dark: #000000;
+  --success: #27ae60;
+  --danger: #e74c3c;
+  --warning: #f39c12;
+  --light: #2c3e50;
+  --dark: #ecf0f1;
+  --gray: #95a5a6;
+  --light-gray: #f8f9fa;
+  --cbackground: #fafafa;
+
+  /* Spacing */
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 30px;
+  --spacing-xxl: 50px;
+
+  /* Typography */
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Playfair Display', serif;
+  --font-size-sm: 12px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+  --line-height: 1.6;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Premium Additions */
+  --p-glass-bg: rgba(255, 255, 255, 0.9);
+  --p-glass-border: rgba(0, 0, 0, 0.08);
+  --p-gold-gradient: linear-gradient(135deg, #333333 0%, #111111 50%, #000000 100%);
+  --p-dark-gradient: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+}
+
+/* ============================================
+   2. RESET & BASE STYLES
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optional: Hide scrollbar during initial load for cleaner entrance */
+body.loading {
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-main);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  color: #111111;
+  background: var(--app-bg);
+  overflow-x: hidden;
+  animation: pageFadeIn 0.8s ease both;
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Smooth image reveal */
+img {
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+img[loading="lazy"] {
+  opacity: 0;
+}
+
+/* Class to be added via JS or just rely on CSS transition if possible */
+img.loaded {
+  opacity: 1;
+}
+
+/* Fallback for simple images — just fade them in on mount */
+img:not([loading="lazy"]) {
+  animation: imgFadeIn 0.5s 0.2s ease both;
+}
+
+@keyframes imgFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ============================================
+   3. TYPOGRAPHY
+   ============================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+  color: var(--primary);
+}
+
+h1 {
+  font-size: var(--font-size-xxl);
+}
+
+h2 {
+  font-size: var(--font-size-xl);
+}
+
+h3 {
+  font-size: var(--font-size-lg);
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+/* ============================================
+   4. BUTTONS
+   ============================================ */
+
+.btn,
+button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-block;
+  text-align: center;
+}
+
+.btn:disabled,
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Button Variants */
+.btn-primary {
+  background: var(--primary);
+  color: #121212;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-dark);
+  color: #121212;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: #121212;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--secondary-dark);
+  color: #121212;
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #c0392b;
+}
+
+.btn-success {
+  background: var(--success);
+  color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+  background: #229954;
+}
+
+/* ============================================
+   5. FORMS
+   ============================================ */
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid #dddddd;
+  background: #ffffff;
+  color: #000000;
+  border-radius: var(--radius-md);
+  font-family: var(--font-main);
+  font-size: var(--font-size-base);
+  transition: border-color var(--transition-fast);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #000000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+label {
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--dark);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ============================================
+   6. LAYOUT
+   ============================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.row {
+  display: flex;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.col {
+  flex: 1;
+  min-width: 250px;
+}
+
+/* ============================================
+   7. CARDS & BOXES
+   ============================================ */
+
+.card {
+  background: var(--app-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ============================================
+   8. UTILITIES
+   ============================================ */
+
+/* Spacing */
+.mt-1 {
+  margin-top: var(--spacing-sm);
+}
+
+.mt-2 {
+  margin-top: var(--spacing-md);
+}
+
+.mt-3 {
+  margin-top: var(--spacing-lg);
+}
+
+.mt-4 {
+  margin-top: var(--spacing-xl);
+}
+
+.mb-1 {
+  margin-bottom: var(--spacing-sm);
+}
+
+.mb-2 {
+  margin-bottom: var(--spacing-md);
+}
+
+.mb-3 {
+  margin-bottom: var(--spacing-lg);
+}
+
+.mb-4 {
+  margin-bottom: var(--spacing-xl);
+}
+
+.p-1 {
+  padding: var(--spacing-sm);
+}
+
+.p-2 {
+  padding: var(--spacing-md);
+}
+
+.p-3 {
+  padding: var(--spacing-lg);
+}
+
+.p-4 {
+  padding: var(--spacing-xl);
+}
+
+/* Text Alignment */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Text Colors */
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+.text-success {
+  color: var(--success);
+}
+
+.text-danger {
+  color: var(--danger);
+}
+
+.text-gray {
+  color: var(--gray);
+}
+
+/* Display */
+.d-none {
+  display: none;
+}
+
+.d-block {
+  display: block;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-grid {
+  display: grid;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Background Colors */
+.bg-light {
+  background: var(--light-gray);
+}
+
+.bg-dark {
+  background: var(--dark);
+  color: white;
+}
+
+.bg-primary {
+  background: var(--primary);
+  color: white;
+}
+
+/* Border */
+.border {
+  border: 1px solid #e5e5e5;
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Rounded */
+.rounded {
+  border-radius: var(--radius-md);
+}
+
+.rounded-lg {
+  border-radius: var(--radius-lg);
+}
+
+.glass-panel {
+  background: var(--p-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--p-glass-border);
+}
+
+.text-gradient-gold {
+  background: var(--p-gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* ============================================
+   9. RESPONSIVE - TABLET
+   ============================================ */
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .row {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .col {
+    min-width: 100%;
+  }
+}
+
+/* ============================================
+   10. RESPONSIVE - MOBILE
+   ============================================ */
+
+@media (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .btn,
+  button {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 12px;
+    width: 100%;
+  }
+}
+
+/* ============================================
+   11. SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cccccc;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999999;
+}
+
+/* ============================================
+   12. ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-in;
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+.skeleton-block {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.skeleton-block::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.04) 50%,
+      rgba(0, 0, 0, 0) 100%);
+  animation: skeletonShimmer 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.skeleton-fill {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.skeleton-text {
+  display: block;
+  height: 12px;
+  border-radius: 999px;
+}
+
+.skeleton-text-xs {
+  width: 34%;
+}
+
+.skeleton-text-sm {
+  width: 48%;
+}
+
+.skeleton-text-md {
+  width: 72%;
+}
+
+.skeleton-text-lg {
+  width: 58%;
+}
+
+.skeleton-product-card {
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.skeleton-product-image {
+  aspect-ratio: 4 / 5;
+  border-radius: 0;
+}
+
+.skeleton-product-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.skeleton-chip {
+  display: inline-flex;
+  width: 88px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-chip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.14) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  animation: skeletonShimmer 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+@keyframes skeletonShimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

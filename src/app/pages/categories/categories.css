@@ -1,0 +1,182 @@
+/* ===================== PAGE HEADER ===================== */
+.page-header {
+  padding: 140px 24px 60px;
+  text-align: center;
+  background: #ffffff;
+}
+
+.page-title {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  font-weight: 700;
+  font-style: italic;
+  color: #000000;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  animation: titleFadeIn 0.8s ease both;
+}
+
+.page-divider {
+  width: 48px;
+  height: 1px;
+  background: #000000;
+  margin: 32px auto 0;
+  animation: titleFadeIn 0.8s 0.15s ease both;
+}
+
+@keyframes titleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================== CATEGORIES SECTION ===================== */
+.categories-section {
+  background: #ffffff;
+  padding: 0 0 120px;
+}
+
+.categories-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===================== GRID ===================== */
+.categories-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  row-gap: 64px;
+}
+
+/* ===================== CARD ===================== */
+.category-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  cursor: pointer;
+}
+
+/* Offset every other card for asymmetric feel */
+.category-card.offset {
+  margin-top: 96px;
+}
+
+/* Image wrapper */
+.card-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 0.73;
+  width: 100%;
+  background: #f3f3f4;
+}
+
+.cat-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 1s ease;
+}
+
+.category-card:hover .cat-img {
+  transform: scale(1.05);
+}
+
+/* Skeleton image placeholder */
+.skeleton-img {
+  aspect-ratio: 0.73;
+  background: #f3f3f4;
+}
+
+/* Card info */
+.card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* CTA link */
+.card-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #000000;
+  transition: opacity 0.3s;
+}
+
+.cta-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.card-cta svg {
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover .card-cta svg {
+  transform: translateX(4px);
+}
+
+.cta-underline {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #000000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover .cta-underline {
+  transform: scaleX(1);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 36px;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+    row-gap: 48px;
+  }
+
+  .category-card.offset {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 28px;
+  }
+
+  .page-header {
+    padding: 120px 20px 40px;
+  }
+}

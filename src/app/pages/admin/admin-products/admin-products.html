@@ -1,0 +1,244 @@
+<app-admin-header></app-admin-header>
+
+<main class="admin-page">
+  <div class="admin-container">
+
+    <!-- ── Page Header ──────────────────────────────────────── -->
+    <div class="page-header">
+      <div>
+        <h1>Products</h1>
+        <p class="page-subtitle">Manage your product catalog</p>
+      </div>
+      @if (!showForm) {
+        <button class="add-btn" (click)="openAddForm()">
+          <i class="fa-solid fa-plus"></i> Add Product
+        </button>
+      }
+    </div>
+
+    <!-- ── Product Form (Add / Edit) ────────────────────────── -->
+    @if (showForm) {
+      <div class="form-panel">
+        <div class="form-panel-header">
+          <h2>{{ editingId ? 'Edit Product' : 'Add New Product' }}</h2>
+          <button class="close-btn" (click)="closeForm()" type="button">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <form (ngSubmit)="onSave()" class="product-form">
+          <div class="form-grid">
+            <!-- Name -->
+            <div class="form-group span-2">
+              <label for="prod-name">Product Name *</label>
+              <input id="prod-name" type="text" [(ngModel)]="form.name" name="name"
+                placeholder="e.g. Classic ALO T-Shirt" (ngModelChange)="onNameChange()" required />
+            </div>
+
+            <!-- Slug -->
+            <div class="form-group span-2">
+              <label for="prod-slug">Slug</label>
+              <input id="prod-slug" type="text" [(ngModel)]="form.slug" name="slug"
+                placeholder="auto-generated" />
+            </div>
+
+            <!-- Description -->
+            <div class="form-group span-full">
+              <label for="prod-desc">Description *</label>
+              <textarea id="prod-desc" [(ngModel)]="form.description" name="description"
+                placeholder="Describe the product..." rows="3" required></textarea>
+            </div>
+
+            <!-- Price -->
+            <div class="form-group">
+              <label for="prod-price">Price *</label>
+              <input id="prod-price" type="number" [(ngModel)]="form.price" name="price"
+                placeholder="0" min="0" required />
+            </div>
+
+            <!-- Original Price -->
+            <div class="form-group">
+              <label for="prod-orig-price">Original Price</label>
+              <input id="prod-orig-price" type="number" [(ngModel)]="form.original_price"
+                name="original_price" placeholder="0" min="0" />
+            </div>
+
+            <!-- Discount -->
+            <div class="form-group">
+              <label for="prod-discount">Discount %</label>
+              <input id="prod-discount" type="number" [(ngModel)]="form.discount"
+                name="discount" placeholder="0" min="0" max="100" />
+            </div>
+
+            <!-- Stock -->
+            <div class="form-group">
+              <label for="prod-stock">Stock</label>
+              <input id="prod-stock" type="number" [(ngModel)]="form.stock"
+                name="stock" placeholder="0" min="0" />
+            </div>
+
+            <!-- Category -->
+            <div class="form-group span-2">
+              <label for="prod-cat">Category</label>
+              <select id="prod-cat" [(ngModel)]="form.category_id" name="category_id"
+                (ngModelChange)="onCategoryChange()">
+                <option value="">— Select Category —</option>
+                @for (cat of categories; track cat.id) {
+                  <option [value]="cat.id">{{ cat.name }}</option>
+                }
+              </select>
+            </div>
+
+            <!-- Sizes -->
+            <div class="form-group">
+              <label for="prod-sizes">Sizes (comma-separated)</label>
+              <input id="prod-sizes" type="text" [(ngModel)]="form.sizes" name="sizes"
+                placeholder="S, M, L, XL" />
+            </div>
+
+            <!-- Colors -->
+            <div class="form-group">
+              <label for="prod-colors">Colors (comma-separated)</label>
+              <input id="prod-colors" type="text" [(ngModel)]="form.colors" name="colors"
+                placeholder="White, Black" />
+            </div>
+
+            <!-- Featured -->
+            <div class="form-group span-full">
+              <label class="checkbox-label">
+                <input type="checkbox" [(ngModel)]="form.featured" name="featured" />
+                <span class="checkmark"></span>
+                Featured Product (shown on homepage)
+              </label>
+            </div>
+
+            <!-- Main Image -->
+            <div class="form-group span-full">
+              <app-image-upload
+                label="Main Image"
+                [currentUrl]="form.image"
+                (imageSelected)="onMainImageSelected($event)"
+                (imageRemoved)="onMainImageRemoved()"
+              ></app-image-upload>
+            </div>
+
+            <!-- Additional Images -->
+            <div class="form-group span-full">
+              <app-image-upload
+                label="Additional Images"
+                [multiple]="true"
+                [currentUrls]="form.images"
+                (multipleImagesSelected)="onAdditionalImagesSelected($event)"
+                (multipleImageRemoved)="onAdditionalImageRemoved($event)"
+              ></app-image-upload>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="closeForm()">Cancel</button>
+            <button type="submit" class="save-btn" [disabled]="saving">
+              @if (saving) {
+                <i class="fa-solid fa-spinner fa-spin"></i> Saving...
+              } @else {
+                <i class="fa-solid fa-floppy-disk"></i> {{ editingId ? 'Update Product' : 'Create Product' }}
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    }
+
+    <!-- ── Products Table ─────────────────────────────────── -->
+    @if (!showForm) {
+      @if (loading) {
+        <div class="table-skeleton">
+          @for (i of [1,2,3,4,5]; track i) {
+            <div class="skeleton-row skeleton-block"><div class="skeleton-fill"></div></div>
+          }
+        </div>
+      } @else if (products.length === 0) {
+        <div class="empty-state">
+          <i class="fa-solid fa-box-open"></i>
+          <p>No products yet. Add your first product to get started.</p>
+          <button class="add-btn" (click)="openAddForm()">
+            <i class="fa-solid fa-plus"></i> Add Product
+          </button>
+        </div>
+      } @else {
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Category</th>
+                <th>Featured</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (product of products; track product.id) {
+                <tr>
+                  <td>
+                    <div class="table-thumb">
+                      @if (product.image) {
+                        <img [src]="product.image" [alt]="product.name" />
+                      } @else {
+                        <div class="no-image"><i class="fa-solid fa-image"></i></div>
+                      }
+                    </div>
+                  </td>
+                  <td>
+                    <span class="product-name">{{ product.name }}</span>
+                    <span class="product-slug">{{ product.slug }}</span>
+                  </td>
+                  <td>
+                    <span class="price">{{ product.price | number }}</span>
+                    @if (product.discount) {
+                      <span class="discount-badge">-{{ product.discount }}%</span>
+                    }
+                  </td>
+                  <td>
+                    <span class="stock" [class.low-stock]="product.stock < 5">
+                      {{ product.stock }}
+                    </span>
+                  </td>
+                  <td>{{ product.category_name || '—' }}</td>
+                  <td>
+                    @if (product.featured) {
+                      <i class="fa-solid fa-star featured-star"></i>
+                    } @else {
+                      <span class="text-muted">—</span>
+                    }
+                  </td>
+                  <td>
+                    <div class="row-actions">
+                      <button class="icon-btn edit-icon" (click)="openEditForm(product)" title="Edit">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </button>
+                      @if (deleteConfirmId === product.id) {
+                        <button class="icon-btn confirm-delete" (click)="onDelete(product.id)" title="Confirm Delete">
+                          <i class="fa-solid fa-check"></i>
+                        </button>
+                        <button class="icon-btn cancel-delete" (click)="cancelDelete()" title="Cancel">
+                          <i class="fa-solid fa-xmark"></i>
+                        </button>
+                      } @else {
+                        <button class="icon-btn delete-icon" (click)="confirmDelete(product.id)" title="Delete">
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    }
+  </div>
+</main>

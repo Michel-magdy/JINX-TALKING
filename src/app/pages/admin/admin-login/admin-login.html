@@ -1,0 +1,46 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-header">
+      <i class="fa-solid fa-shield-halved login-icon"></i>
+      <h1>Admin Access</h1>
+      <p class="login-subtitle">Enter your admin password to continue</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="admin-password">Password</label>
+        <div class="input-wrapper">
+          <i class="fa-solid fa-lock input-icon"></i>
+          <input
+            id="admin-password"
+            type="password"
+            placeholder="Enter admin password"
+            [(ngModel)]="password"
+            name="password"
+            autocomplete="current-password"
+            [disabled]="loading"
+          />
+        </div>
+      </div>
+
+      @if (error) {
+        <div class="error-msg">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          {{ error }}
+        </div>
+      }
+
+      <button type="submit" class="login-btn" [disabled]="!password || loading">
+        @if (loading) {
+          <i class="fa-solid fa-spinner fa-spin"></i> Verifying...
+        } @else {
+          <i class="fa-solid fa-right-to-bracket"></i> Enter Admin Panel
+        }
+      </button>
+    </form>
+
+    <a routerLink="/" class="back-link">
+      <i class="fa-solid fa-arrow-left"></i> Back to Store
+    </a>
+  </div>
+</div>
