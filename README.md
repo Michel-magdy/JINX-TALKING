@@ -1,4 +1,4 @@
-# Prestige
+# JINX TALKING
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.1.
 
@@ -6,9 +6,9 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 Use this URL to open the deployed app:
 
-`https://michel-magdy.github.io/Prestige/`
+`https://michel-magdy.github.io/JINX-TALKING/`
 
-Do not use the repository URL (`https://github.com/Michel-magdy/Prestige`) to view the app, because that page shows the repo README.
+Do not use the repository URL (`https://github.com/Michel-magdy/JINX-TALKING`) to view the app, because that page shows the repo README.
 
 GitHub Pages deployment is automated with `.github/workflows/deploy-pages.yml` on every push to `main`.
 

@@ -41,7 +41,7 @@ export class App implements OnInit, OnDestroy {
     // - Always fast, never waits for the network.
     // - 600ms if data is already cached.
     // - 1200ms on first load.
-    const hasCache = localStorage.getItem('prestige_cache_categories') !== null;
+    const hasCache = localStorage.getItem('jinx_talking_cache_categories') !== null;
     const duration = hasCache ? 600 : 1200;
 
     this.preloaderTimeoutId = setTimeout(() => {

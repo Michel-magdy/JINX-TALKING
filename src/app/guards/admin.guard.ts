@@ -3,7 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 
 export const adminGuard: CanActivateFn = () => {
   const router = inject(Router);
-  const isAdmin = sessionStorage.getItem('prestige_admin') === 'true';
+  const isAdmin = sessionStorage.getItem('jinx_talking_admin') === 'true';
 
   if (!isAdmin) {
     router.navigate(['/admin/login']);

@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "Prestige": {
+    "jinx-talking": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -68,10 +68,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Prestige:build:production"
+              "buildTarget": "jinx-talking:build:production"
             },
             "development": {
-              "buildTarget": "Prestige:build:development"
+              "buildTarget": "jinx-talking:build:development"
             }
           },
           "defaultConfiguration": "development"

@@ -22,18 +22,18 @@ export class AdminService {
 
   login(password: string): boolean {
     if (password === environment.adminPassword) {
-      sessionStorage.setItem('prestige_admin', 'true');
+      sessionStorage.setItem('jinx_talking_admin', 'true');
       return true;
     }
     return false;
   }
 
   logout(): void {
-    sessionStorage.removeItem('prestige_admin');
+    sessionStorage.removeItem('jinx_talking_admin');
   }
 
   isLoggedIn(): boolean {
-    return sessionStorage.getItem('prestige_admin') === 'true';
+    return sessionStorage.getItem('jinx_talking_admin') === 'true';
   }
 
   // ── Products ────────────────────────────────────────────────────────

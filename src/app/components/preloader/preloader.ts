@@ -9,18 +9,22 @@ import { CommonModule } from '@angular/common';
     <div class="preloader-overlay" [class.fade-out]="!isVisible" *ngIf="isMounted">
       <div class="loader-content">
         <div class="crown-container">
-          <img src="assets/images/crown.png" alt="Prestige" class="preloader-logo">
+          <img src="assets/images/jinx-logo.svg" alt="JINX TALKING" class="preloader-logo">
           <div class="pulse-ring"></div>
         </div>
         <div class="loader-text">
-          <span class="letter">P</span>
-          <span class="letter">R</span>
-          <span class="letter">E</span>
-          <span class="letter">S</span>
-          <span class="letter">T</span>
+          <span class="letter">J</span>
           <span class="letter">I</span>
+          <span class="letter">N</span>
+          <span class="letter">X</span>
+          <span class="letter">&nbsp;</span>
+          <span class="letter">T</span>
+          <span class="letter">A</span>
+          <span class="letter">L</span>
+          <span class="letter">K</span>
+          <span class="letter">I</span>
+          <span class="letter">N</span>
           <span class="letter">G</span>
-          <span class="letter">E</span>
         </div>
         <div class="loading-bar">
           <div class="bar-progress"></div>
@@ -108,6 +112,10 @@ import { CommonModule } from '@angular/common';
     .letter:nth-child(6) { animation-delay: 0.5s; }
     .letter:nth-child(7) { animation-delay: 0.6s; }
     .letter:nth-child(8) { animation-delay: 0.7s; }
+    .letter:nth-child(9) { animation-delay: 0.8s; }
+    .letter:nth-child(10) { animation-delay: 0.9s; }
+    .letter:nth-child(11) { animation-delay: 1.0s; }
+    .letter:nth-child(12) { animation-delay: 1.1s; }
 
     @keyframes letterDrop {
       0%, 100% { transform: translateY(0); opacity: 1; color: #fff; }

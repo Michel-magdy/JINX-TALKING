@@ -5,13 +5,13 @@ import { ICartItem } from '../models/icart-item';
 import { IProduct } from '../models/iproduct';
 
 // Set the admin's WhatsApp number here (include country code, no + or spaces)
-export const ADMIN_WHATSAPP = '201122747863';
+export const ADMIN_WHATSAPP = '201228630310';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private readonly STORAGE_KEY = 'prestige_cart';
+  private readonly STORAGE_KEY = 'jinx_talking_cart';
   private cart$ = new BehaviorSubject<ICart>({ items: [], total: 0 });
 
   constructor() {
